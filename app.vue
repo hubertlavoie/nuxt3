@@ -1,15 +1,26 @@
+<script setup lang="ts">
+const layout = useLayoutStore();
+</script>
 <template>
-  <v-app>
-    <v-app-bar app color="primary" clipped-left> fdsa fsd </v-app-bar>
-
-    <v-navigation-drawer app clipped permanent> fsaf </v-navigation-drawer>
-
-    <v-main>
-      <v-container fluid>
-        <NuxtPage />
-      </v-container>
-    </v-main>
-
-    <v-footer app>>fdsa fs </v-footer>
-  </v-app>
+  <div>
+    <NuxtLayout>
+      <NuxtPage />
+    </NuxtLayout>
+    <v-snackbar
+      v-model="layout.showSnackbar"
+      timeout="3000"
+      :color="layout.snackBarColor"
+      location="top right"
+    >
+      {{ layout.snackBarMessage }}
+      <v-btn
+        color="white"
+        variant="text"
+        @click="layout.showSnackbar = false"
+        class="ml-10"
+      >
+        <v-icon icon="mdi-close"></v-icon>
+      </v-btn>
+    </v-snackbar>
+  </div>
 </template>
