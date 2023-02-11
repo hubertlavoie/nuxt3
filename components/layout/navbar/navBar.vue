@@ -11,7 +11,7 @@ const layout = useLayoutStore();
       class="ml-3"
     ></v-app-bar-nav-icon>
     <img src="/images/felix.svg" width="60" alt="Felix" class="ml-2" />
-    <span class="relative top-[8px] pl-1 text-xs">PORTAL</span>
+    <span class="relative top-[8px] pl-2 text-xs">PORTAL</span>
     <v-spacer />
     <navbarWidgets />
   </v-app-bar>

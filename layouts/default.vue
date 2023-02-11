@@ -14,11 +14,11 @@ useHead({
 </script>
 
 <template>
-  <v-app>
+  <v-app class="bg-accent">
     <navbar />
     <sidebar />
     <v-main>
-      <v-container fluid class="bg-accent min-h-screen">
+      <v-container fluid>
         <div class="p-8">
           <slot></slot>
         </div>

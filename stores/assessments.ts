@@ -1,16 +1,16 @@
 // stores/counter.js
 import { defineStore } from "pinia";
-// import axios from "axios";
 import { openAssessments } from "@/mocks/openAssessments";
 import { viewAssessment } from "@/mocks/viewAssessment";
+// import axios from "axios";
 
 export const useAssessmentsStore = defineStore("assessments", () => {
   let open = ref([] as any);
-  let currentAssessment = ref(null as Object | null);
+  let currentAssessment = ref(null as any);
   const getOpenAssessments = () => {
     open.value = openAssessments;
   };
-  const setCurrentAssessment = (assessment: Object): void => {
+  const setCurrentAssessment = (): void => {
     currentAssessment.value = viewAssessment;
   };
   const denyAssessment = (reason: string, showPatient: boolean): void => {
@@ -20,7 +20,9 @@ export const useAssessmentsStore = defineStore("assessments", () => {
   const sendInvalidId = () => {
     console.log("invalid id");
   };
-
+  const approveAssessment = (assessment: Object): void => {
+    console.log(assessment);
+  };
   return {
     open,
     currentAssessment,
@@ -28,5 +30,6 @@ export const useAssessmentsStore = defineStore("assessments", () => {
     setCurrentAssessment,
     denyAssessment,
     sendInvalidId,
+    approveAssessment,
   };
 });

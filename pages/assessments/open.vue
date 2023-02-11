@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import { ref } from "vue";
 const assessments = useAssessmentsStore();
-assessments.getOpenAssessments();
 const router = useRouter();
-const itemsPerPage = ref(10);
+const itemsPerPage = ref(16);
+let search = ref("" as string);
 const headers = ref([
   { title: "Id", align: "start", key: "id" },
   { title: "Patient name", align: "start", key: "patient_name" },
@@ -17,6 +16,7 @@ const headers = ref([
 
   { title: "", align: "end", key: "actions", sortable: false },
 ]);
+assessments.getOpenAssessments();
 </script>
 
 <template>
@@ -24,7 +24,13 @@ const headers = ref([
     <h1 class="text-3xl mb-5 pb-5 border-b text-primary font-bold">
       <v-icon icon="mdi-animation-outline"></v-icon> Open assessments
     </h1>
-
+    <v-text-field
+      v-model="search"
+      append-inner-icon="mdi-magnify"
+      label="Search"
+      single-line
+      hide-details
+    ></v-text-field>
     <v-data-table
       width="100%"
       :items-per-page="itemsPerPage"
@@ -32,15 +38,14 @@ const headers = ref([
       :items="assessments.open"
       item-value="name"
       class="elevation-1"
+      :search="search"
     >
       <template v-slot:item.actions="{ item }">
         <v-btn
           size="small"
           color="primary"
-          @click="
-            assessments.setCurrentAssessment(item.raw);
-            router.push('/assessments/view');
-          "
+          @click="router.push('/assessments/view')"
+          prepend-icon="mdi-eye"
         >
           View
         </v-btn>

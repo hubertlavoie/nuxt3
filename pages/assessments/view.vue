@@ -1,45 +1,40 @@
 <script setup lang="ts">
-import { ref } from "vue";
 const assessments = useAssessmentsStore();
 const layout = useLayoutStore();
-const panel = ref([0]);
+const panel = ref([0, 1, 2]);
 const router = useRouter();
-const bottomButton = ref(null);
+const bottomButton = ref(null as any);
 let denialReason = ref("");
 let shareDenialReasonWithPatient = ref(false);
 let showDenyDialog = ref(false);
-
 let invalidId = ref(false);
-
-if (!assessments.currentAssessment) {
-  router.push("/assessments/open");
-}
 const scrollToBottom = () => {
   if (invalidId.value) {
     bottomButton.value.scrollIntoView();
   }
 };
-
 const denyAssessment = () => {
   showDenyDialog.value = false;
   assessments.denyAssessment(
     denialReason.value,
     shareDenialReasonWithPatient.value
   );
-  layout.showSnackbar = true;
-  layout.snackBarMessage = "The assessment has been successfully denied";
-  layout.snackBarColor = "success";
+  layout.toast("The assessment has been successfully denied", "success");
   router.push("/assessments/open");
 };
-
 const sendInvalidId = () => {
   assessments.sendInvalidId();
-  layout.showSnackbar = true;
-  layout.snackBarMessage =
-    "The invalid ID notification has been successfully sent";
-  layout.snackBarColor = "error";
-  router.push("/assessments/open");
+  layout.toast(
+    "There was an error sending the invalid ID notification",
+    "error",
+    "bottom"
+  );
 };
+const goToTop = () => {
+  window.scrollTo(0, 0);
+};
+const doNothing = () => {};
+assessments.setCurrentAssessment();
 </script>
 
 <template>
@@ -53,7 +48,35 @@ const sendInvalidId = () => {
       </span>
       <span class="text-base"> Assessment Id# 2232</span>
     </h1>
-    <h2 class="mb-10 text-xl ml-2"><strong>Ailment</strong>: Rosacea</h2>
+    <div class="flex justify-between items-center mb-5">
+      <h2 class="text-xl ml-2"><strong>Ailment</strong>: Rosacea</h2>
+      <div class="text-xl">
+        <v-tooltip text="View patient profile" location="bottom">
+          <template v-slot:activator="{ props }">
+            <v-btn v-bind="props" icon="mdi-account" class="mr-[10px]"></v-btn>
+          </template>
+        </v-tooltip>
+        <v-tooltip text="Download assessment" location="bottom">
+          <template v-slot:activator="{ props }">
+            <v-btn
+              v-bind="props"
+              icon="mdi-download-box"
+              class="mr-[10px]"
+            ></v-btn>
+          </template>
+        </v-tooltip>
+        <v-tooltip text="Fax" location="bottom">
+          <template v-slot:activator="{ props }">
+            <v-btn v-bind="props" icon="mdi-fax" class="mr-[10px]"></v-btn>
+          </template>
+        </v-tooltip>
+        <v-tooltip text="Chat with patient" location="bottom">
+          <template v-slot:activator="{ props }">
+            <v-btn v-bind="props" icon="mdi-forum" class="mr-[10px]"></v-btn>
+          </template>
+        </v-tooltip>
+      </div>
+    </div>
 
     <section>
       <v-expansion-panels multiple v-model="panel">
@@ -61,12 +84,12 @@ const sendInvalidId = () => {
           <v-expansion-panel-text>
             <div class="md:flex my-10 mx-8 border-b-2 pb-10">
               <div class="w-full">
-                <ul class="mb-5">
+                <ul class="mb-5 border-l-2 pl-4">
                   <li><strong>Ailment</strong>: Rosacea</li>
                   <li><strong>Status</strong>: Pending</li>
                   <li><strong>Date submitted</strong>: 2022/09/27</li>
                 </ul>
-                <ul class="mb-5">
+                <ul class="mb-5 border-l-2 pl-4">
                   <li>
                     <strong class="text-green-darken-3">
                       <v-icon icon="mdi-pill-multiple"></v-icon> Drug(s)</strong
@@ -74,7 +97,7 @@ const sendInvalidId = () => {
                     <span>Onreltea 0.33% Gel</span>
                   </li>
                 </ul>
-                <ul class="mb-5">
+                <ul class="mb-5 border-l-2 pl-4">
                   <li><strong>Allergies</strong>: none</li>
                   <li><strong>Medical Conditions</strong>: none</li>
                   <li><strong>Medications</strong>: none</li>
@@ -83,14 +106,14 @@ const sendInvalidId = () => {
               </div>
 
               <div class="w-full">
-                <ul class="mb-5">
+                <ul class="mb-5 border-l-2 pl-4">
                   <li><strong>Name</strong>: Hubert Lavoie</li>
                   <li><strong>Age</strong>: 19</li>
                   <li><strong>Gender</strong>: Female</li>
                   <li><strong>Assigned at birth</strong>: Female</li>
                   <li><strong>Date of birth</strong>: 2003/05/02</li>
                 </ul>
-                <ul class="mb-5">
+                <ul class="mb-5 border-l-2 pl-4">
                   <li><strong>Location</strong>: ON</li>
                   <li><strong>Phone</strong>: (555) 555-5555</li>
                   <li><strong>Email</strong>: patient@felix.test</li>
@@ -125,11 +148,16 @@ const sendInvalidId = () => {
                   v-for="question in assessments.currentAssessment?.application"
                   :key="question.id"
                 >
-                  <v-timeline-item v-if="question.value">
+                  <v-timeline-item
+                    v-if="question.value"
+                    :dot-color="
+                      question.original.flagmd === '1' ? 'secondary' : 'primary'
+                    "
+                  >
                     <template v-slot:opposite
                       ><v-icon
                         icon="mdi-flag"
-                        color="error"
+                        color="secondary"
                         v-if="question.original.flagmd === '1'"
                         class="mt-2"
                       ></v-icon>
@@ -139,7 +167,7 @@ const sendInvalidId = () => {
                       <p
                         :class="
                           question.original.flagmd === '1'
-                            ? 'text-error mb-5'
+                            ? 'text-secondary mb-5'
                             : 'mb-5'
                         "
                       >
@@ -172,19 +200,32 @@ const sendInvalidId = () => {
       </v-expansion-panels>
     </section>
     <div ref="bottomButton">
+      <v-btn
+        variant="flat"
+        size="large"
+        color="primary"
+        class="float-right"
+        append-icon="mdi-chevron-up"
+        @click="goToTop()"
+      >
+        Go to top
+      </v-btn>
       <section class="my-10" v-if="!invalidId">
         <v-btn
           variant="flat"
+          size="large"
           color="primary"
           class="mr-3"
-          append-icon="mdi-chevron-right"
+          prepend-icon="mdi-check"
+          @click="router.push('/assessments/approve')"
         >
           Approve assessments
         </v-btn>
         <v-btn
           variant="flat"
+          size="large"
           color="secondary"
-          append-icon="mdi-chevron-right"
+          prepend-icon="mdi-cancel"
           @click="showDenyDialog = true"
         >
           Deny assessments
@@ -194,7 +235,8 @@ const sendInvalidId = () => {
         <v-btn
           variant="flat"
           color="secondary"
-          append-icon="mdi-chevron-right"
+          size="large"
+          prepend-icon="mdi-send"
           @click="sendInvalidId"
         >
           Send invalid ID notification
@@ -205,7 +247,7 @@ const sendInvalidId = () => {
     <v-dialog v-model="showDenyDialog" max-width="500px">
       <v-card>
         <v-card-title>
-          <p class="text-h5 pt-5">Deny assessment</p>
+          <p class="text-h5 p-5 border-b-2 mb-2">Deny assessment</p>
         </v-card-title>
         <v-card-text>
           <v-textarea
@@ -227,10 +269,10 @@ const sendInvalidId = () => {
         <v-card-actions>
           <v-spacer />
           <div class="mb-5 mr-5">
-            <v-btn color="error" @click="showDenyDialog = false">
+            <v-btn variant="flat" color="gray" @click="showDenyDialog = false">
               Cancel
             </v-btn>
-            <v-btn color="primary" @click="denyAssessment()">
+            <v-btn variant="flat" color="primary" @click="denyAssessment()">
               Deny assessment
             </v-btn>
           </div>
