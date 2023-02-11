@@ -33,7 +33,6 @@ const sendInvalidId = () => {
 const goToTop = () => {
   window.scrollTo(0, 0);
 };
-const doNothing = () => {};
 assessments.setCurrentAssessment();
 </script>
 
@@ -42,11 +41,14 @@ assessments.setCurrentAssessment();
     <h1
       class="text-3xl mb-5 pb-5 border-b text-primary font-bold flex justify-between items-center"
     >
-      <span>
-        <v-icon icon="mdi-account"></v-icon> Hubert Lavoie
-        <span class="font-normal">(id# 34542)</span>
-      </span>
-      <span class="text-base"> Assessment Id# 2232</span>
+      <h4>
+        <v-icon icon="mdi-account" class="relative top-[-4px]"></v-icon>
+        Hubert Lavoie
+        <span class="font-normal text-xl">(id# 34542)</span>
+      </h4>
+      <h3 class="text-base">
+        Assessment Id# <span class="font-normal">2232</span>
+      </h3>
     </h1>
     <div class="flex justify-between items-center mb-5">
       <h2 class="text-xl ml-2"><strong>Ailment</strong>: Rosacea</h2>
@@ -92,7 +94,8 @@ assessments.setCurrentAssessment();
                 <ul class="mb-5 border-l-2 pl-4">
                   <li>
                     <strong class="text-green-darken-3">
-                      <v-icon icon="mdi-pill-multiple"></v-icon> Drug(s)</strong
+                      <v-icon icon="mdi-pill-multiple"></v-icon> Requested
+                      Drug(s)</strong
                     >:<br />
                     <span>Onreltea 0.33% Gel</span>
                   </li>
@@ -205,10 +208,9 @@ assessments.setCurrentAssessment();
         size="large"
         color="primary"
         class="float-right"
-        append-icon="mdi-chevron-up"
         @click="goToTop()"
       >
-        Go to top
+        <v-icon>mdi-chevron-up</v-icon>
       </v-btn>
       <section class="my-10" v-if="!invalidId">
         <v-btn
@@ -216,10 +218,10 @@ assessments.setCurrentAssessment();
           size="large"
           color="primary"
           class="mr-3"
-          prepend-icon="mdi-check"
+          prepend-icon="mdi-pen"
           @click="router.push('/assessments/approve')"
         >
-          Approve assessments
+          Write prescription
         </v-btn>
         <v-btn
           variant="flat"

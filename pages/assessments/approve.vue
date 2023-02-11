@@ -27,7 +27,9 @@ const save = (t: any) => {
 };
 const clear = () => signature1.value.clear();
 const undo = () => signature1.value.undo();
-const doNothing = () => {};
+const doNothing = () => {
+  console.log("nothing to see here, move on");
+};
 </script>
 
 <template>

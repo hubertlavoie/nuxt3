@@ -16,7 +16,9 @@ const headers = ref([
 
   { title: "", align: "end", key: "actions", sortable: false },
 ]);
-assessments.getOpenAssessments();
+if (!assessments.open.length) {
+  assessments.getOpenAssessments();
+}
 </script>
 
 <template>

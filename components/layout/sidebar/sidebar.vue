@@ -10,7 +10,7 @@ const menuDashboard = ref([
   {
     text: "Clinical Admin",
     icon: "mdi-view-dashboard-outline",
-    to: "",
+    to: "/test404",
   },
   {
     text: "Pharmacy admin",

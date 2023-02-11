@@ -19,10 +19,10 @@ const Lighttheme: ThemeDefinition = {
     // secondary: "#e6896a",
     primary: "#333333",
     info: "#1E88E5",
-    success: "#2E7D32",
-    accent: "#f4f5ee",
+    success: "#388E3C",
+    accent: "#fafafa",
     warning: "#FFB300",
-    error: "#B71C1C",
+    error: "#cf3907",
     secondary: "#cf3907",
   },
 };

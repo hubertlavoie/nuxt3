@@ -17,8 +17,14 @@ useHead({
   <v-app class="bg-white">
     <navbar />
     <sidebar />
-    <div class="flex justify-center items-center" style="min-height: 100%">
-      <img src="/images/error404.avif" style="max-width: 40%" alt="Julia" />
+    <div
+      class="flex justify-center items-center"
+      style="min-height: 100%; padding-left: 255px"
+    >
+      <Vue3Lottie
+        animationLink="https://assets5.lottiefiles.com/packages/lf20_suhe7qtm.json"
+        :width="'50%'"
+      />
     </div>
   </v-app>
 </template>

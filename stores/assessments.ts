@@ -7,11 +7,15 @@ import { viewAssessment } from "@/mocks/viewAssessment";
 export const useAssessmentsStore = defineStore("assessments", () => {
   let open = ref([] as any);
   let currentAssessment = ref(null as any);
+  let past = ref([] as any);
   const getOpenAssessments = () => {
     open.value = openAssessments;
   };
   const setCurrentAssessment = (): void => {
     currentAssessment.value = viewAssessment;
+  };
+  const setPastAssessment = (pastAssessments: any): void => {
+    past.value = pastAssessments;
   };
   const denyAssessment = (reason: string, showPatient: boolean): void => {
     console.log(reason);
@@ -31,5 +35,6 @@ export const useAssessmentsStore = defineStore("assessments", () => {
     denyAssessment,
     sendInvalidId,
     approveAssessment,
+    setPastAssessment,
   };
 });

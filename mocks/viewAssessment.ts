@@ -1690,7 +1690,7 @@ export const viewAssessment = {
         required_re_answer_renewal_change_medication: "0",
         shortq: null,
         hidemd: "0",
-        flagmd: "0",
+        flagmd: "1",
         send_to_chat: "0",
         required: true,
         custom_logic: "1",

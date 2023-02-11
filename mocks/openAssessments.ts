@@ -1,6 +1,7 @@
 export const openAssessments = [
   {
     id: 6,
+    notes: "I am waiting for this user to upload his id",
     uuid: "aa3a08db-391d-445b-9f6f-3c4e77efd008",
     type: "visit",
     user_id: 3,
@@ -5232,6 +5233,7 @@ export const openAssessments = [
     patient_name: "Patient User",
     created_at: "2023-02-01 17:30:02",
     prescription: null,
+    notes: "I am waiting for this user to upload his id",
     created_at_date_only: "2023/02/01",
     created_at_toronto: "2023-02-01 12:30:02",
     assessed_at_toronto: null,
