@@ -2,7 +2,6 @@
 const assessments = useAssessmentsStore();
 const router = useRouter();
 const itemsPerPage = ref(16);
-const isLoading = ref(false);
 let search = ref("" as string);
 const headers = ref([
   { title: "Id", align: "start", key: "id" },

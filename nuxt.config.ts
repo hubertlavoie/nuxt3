@@ -23,6 +23,9 @@ export default defineNuxtConfig({
       "window.global": {},
     },
   },
+  nitro: {
+    preset: "netlify",
+  },
   modules: [
     // ...
     [

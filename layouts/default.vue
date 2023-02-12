@@ -5,6 +5,8 @@ import { Amplify } from "aws-amplify";
 import awsconfig from "../aws-exports";
 import navbar from "~~/components/layout/navbar/navbar.vue";
 import sidebar from "~~/components/layout/sidebar/sidebar.vue";
+const layout = useLayoutStore();
+
 Amplify.configure(awsconfig);
 useHead({
   title: "Felix Md",
@@ -21,15 +23,33 @@ useHead({
 <template>
   <authenticator :social-providers="['google']">
     <template v-slot="{ user, signOut }">
-      <navbar />
-      <sidebar />
-      <v-main>
-        <v-container fluid>
-          <div class="p-8">
-            <slot></slot>
-          </div>
-        </v-container>
-      </v-main>
+      <v-app class="bg-accent">
+        <navbar />
+        <sidebar />
+        <v-main>
+          <v-container fluid>
+            <div class="p-8">
+              <slot></slot>
+            </div>
+          </v-container>
+        </v-main>
+        <v-snackbar
+          v-model="layout.showSnackbar"
+          timeout="3000"
+          :color="layout.snackBarColor"
+          :location="layout.snackBarPosition"
+        >
+          {{ layout.snackBarMessage }}
+          <v-btn
+            color="white"
+            variant="text"
+            @click="layout.showSnackbar = false"
+            class="ml-10"
+          >
+            <v-icon icon="mdi-close"></v-icon>
+          </v-btn>
+        </v-snackbar>
+      </v-app>
     </template>
   </authenticator>
 </template>

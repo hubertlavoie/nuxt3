@@ -21,6 +21,13 @@ const state = reactive({
   },
   disabled: false,
 });
+const drugs = ref(["Onreltea 0.33% Gel"]);
+const addDrug = () => {
+  drugs.value.push("Tretinoin 0.05% Creamg");
+};
+const removeDrug = (index: number) => {
+  drugs.value.splice(index, 1);
+};
 const signature1 = ref(null as any);
 const save = (t: any) => {
   console.log(signature1.value.save(t));
@@ -83,7 +90,7 @@ const doNothing = () => {
         <p class="text-h5 p-5 border-b-2">Requested Rx Script #9</p>
       </v-card-title>
       <v-card-text>
-        <div class="border-b-2 pb-2 mb-4">
+        <div class="pb-2">
           <ul class="my-5 border-l-2 pl-4">
             <li><strong>Status</strong>: open</li>
             <li><strong>Pharmacy</strong>: Felix Pharmacy East</li>
@@ -99,71 +106,90 @@ const doNothing = () => {
           </ul>
         </div>
 
-        <h4 class="text-base mb-5 font-bold">
+        <div
+          v-for="(drug, index) in drugs"
+          :key="index"
+          class="border-t-2 pt-4"
+        >
+          <v-btn
+            @click="removeDrug(index)"
+            class="mb-5"
+            v-if="index > 0"
+            prepend-icon="mdi-close"
+            color="secondary"
+          >
+            Remove drug
+          </v-btn>
           <v-autocomplete
             v-model="selectedDrug"
             hide-details
             :items="['Onreltea 0.33% Gel', 'Other drug']"
             label="Drug"
+            class="mb-5"
           ></v-autocomplete>
-        </h4>
-        <v-row>
-          <v-col cols="12" sm="6" md="2">
-            <v-text-field hide-details label="LU"></v-text-field>
-          </v-col>
-          <v-col cols="12" sm="10">
-            <div class="flex">
-              <v-text-field hide-details label="Dose"></v-text-field>
-              <v-select
-                hide-details
-                :items="['caps', 'mg', 'appl', 'tab']"
-                class="ml-4"
-              ></v-select>
-              <v-select
-                hide-details
-                :items="['po', 'top', 'pv', 'per nostril']"
-                class="ml-4"
-              ></v-select>
-              <v-select
-                hide-details
-                :items="['od', 'qhs', 'pv']"
-                class="ml-4"
-              ></v-select>
-              <v-checkbox label="prn" hide-details></v-checkbox>
-            </div>
-          </v-col>
-          <v-col cols="8">
-            <div class="flex">
-              <v-text-field type="number" hide-details label="m"></v-text-field>
-              <v-select
-                hide-details
-                :items="['g', 'tab', 'tabs', 'bottle']"
-                class="ml-4"
-              ></v-select>
-              <v-text-field
-                type="number"
-                hide-details
-                label="r"
-                class="ml-4"
-              ></v-text-field>
-              <v-text-field
-                type="text"
-                hide-details
-                label="SIG Code"
-                class="ml-4"
-              ></v-text-field>
-            </div>
-          </v-col>
-          <v-col cols="12">
-            <v-textarea label="Comments"></v-textarea>
-          </v-col>
-        </v-row>
+
+          <v-row>
+            <v-col cols="12" sm="6" md="2">
+              <v-text-field hide-details label="LU"></v-text-field>
+            </v-col>
+            <v-col cols="12" sm="10">
+              <div class="flex">
+                <v-text-field hide-details label="Dose"></v-text-field>
+                <v-select
+                  hide-details
+                  :items="['caps', 'mg', 'appl', 'tab']"
+                  class="ml-4"
+                ></v-select>
+                <v-select
+                  hide-details
+                  :items="['po', 'top', 'pv', 'per nostril']"
+                  class="ml-4"
+                ></v-select>
+                <v-select
+                  hide-details
+                  :items="['od', 'qhs', 'pv']"
+                  class="ml-4"
+                ></v-select>
+                <v-checkbox label="prn" hide-details></v-checkbox>
+              </div>
+            </v-col>
+            <v-col cols="8">
+              <div class="flex">
+                <v-text-field
+                  type="number"
+                  hide-details
+                  label="m"
+                ></v-text-field>
+                <v-select
+                  hide-details
+                  :items="['g', 'tab', 'tabs', 'bottle']"
+                  class="ml-4"
+                ></v-select>
+                <v-text-field
+                  type="number"
+                  hide-details
+                  label="r"
+                  class="ml-4"
+                ></v-text-field>
+                <v-text-field
+                  type="text"
+                  hide-details
+                  label="SIG Code"
+                  class="ml-4"
+                ></v-text-field>
+              </div>
+            </v-col>
+            <v-col cols="12">
+              <v-textarea label="Comments"></v-textarea>
+            </v-col>
+          </v-row>
+        </div>
 
         <div class="flex justify-center border-t-2 pt-5 mt-5">
           <v-btn
             color="primary"
             prepend-icon="mdi-plus"
-            @click="doNothing()"
+            @click="addDrug()"
             size="default"
           >
             Add a drug
