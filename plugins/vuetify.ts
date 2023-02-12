@@ -34,6 +34,12 @@ export default defineNuxtPlugin((nuxtApp) => {
       ...components,
       VDataTable,
     },
+    defaults: {
+      VDataTable: {
+        fixedHeader: true,
+        noDataText: "Results not found",
+      },
+    },
     theme: {
       defaultTheme: "Lighttheme",
       themes: {

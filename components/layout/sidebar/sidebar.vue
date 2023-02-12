@@ -1,5 +1,13 @@
 <script setup lang="ts">
-const route = useRoute();
+import { Auth } from "aws-amplify";
+
+const signOut = async () => {
+  try {
+    await Auth.signOut();
+  } catch (error) {
+    console.log("error signing out: ", error);
+  }
+};
 const layout = useLayoutStore();
 const menuDashboard = ref([
   {
@@ -157,7 +165,7 @@ const menuSettings = ref([
   {
     text: "Logout",
     icon: "mdi-logout",
-    to: "/logout",
+    action: signOut,
   },
 ]);
 </script>
@@ -286,11 +294,12 @@ const menuSettings = ref([
 
         <v-list-item
           density="comfortable"
-          :to="item.to"
+          :to="item.to ? item.to : ''"
           v-for="(item, i) in menuSettings"
           :key="i"
           :value="item"
           active-color="primary"
+          @click="item.action ? item.action() : null"
         >
           <template v-slot:prepend>
             <v-icon :icon="item.icon"></v-icon>

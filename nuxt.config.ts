@@ -1,5 +1,8 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  alias: {
+    "./runtimeConfig": "./runtimeConfig.browser",
+  },
   css: ["@/assets/scss/style.scss"],
   ssr: false,
   imports: {
@@ -17,6 +20,7 @@ export default defineNuxtConfig({
   vite: {
     define: {
       "process.env.DEBUG": false,
+      "window.global": {},
     },
   },
   modules: [
