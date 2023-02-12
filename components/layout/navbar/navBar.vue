@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import navbarWidgets from "~~/components/layout/navbar/navbarWidgets.vue";
+import navbarWidgets from "@/components/layout/navbar/navbarWidgets.vue";
 const layout = useLayoutStore();
 </script>
 
