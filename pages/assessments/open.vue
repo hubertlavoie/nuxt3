@@ -54,6 +54,28 @@ if (!assessments.open.length) {
     >
       <template v-slot:item.actions="{ item }">
         <v-btn
+          v-if="item.value.newMessage === true"
+          size="small"
+          color="success"
+          class="mr-2"
+        >
+          <v-icon>mdi-chat</v-icon>
+          <v-tooltip activator="parent" location="left">New Message</v-tooltip>
+        </v-btn>
+
+        <v-btn
+          v-if="item.value.labResults === true"
+          size="small"
+          color="success"
+          class="mr-2"
+        >
+          <v-icon>mdi-flask-empty-plus</v-icon>
+          <v-tooltip activator="parent" location="left"
+            >Lab results received</v-tooltip
+          >
+        </v-btn>
+
+        <v-btn
           size="small"
           color="primary"
           @click="router.push('/assessments/view')"

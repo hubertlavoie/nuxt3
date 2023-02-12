@@ -440,6 +440,7 @@ export const openAssessments = [
     user_id: 3,
     ailment_id: 12,
     province: "ON",
+    newMessage: true,
     details: {
       flow: "normal",
       patient: {
@@ -1759,6 +1760,7 @@ export const openAssessments = [
     id: 6,
     uuid: "aa3a08db-391d-445b-9f6f-3c4e77efd008",
     type: "visit",
+    labResults: true,
     user_id: 3,
     ailment_id: 12,
     province: "ON",
