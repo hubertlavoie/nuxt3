@@ -52,12 +52,10 @@ const lineData = {
 </script>
 
 <template>
-  <main>
-    <h1 class="text-3xl mb-5 pb-5 border-b text-primary font-bold">
-      <v-icon icon="mdi-home"></v-icon> Dashboard
-    </h1>
+  <h1 class="text-3xl mb-5 pb-5 border-b text-primary font-bold">
+    <v-icon icon="mdi-home"></v-icon> Dashboard
+  </h1>
 
-    <DoughnutChart :chartData="testData" class="mt-10" />
-    <LineChart :chartData="lineData" class="mt-10" />
-  </main>
+  <DoughnutChart :chartData="testData" class="mt-10" />
+  <LineChart :chartData="lineData" class="mt-10" />
 </template>

@@ -3,8 +3,6 @@ import { Authenticator } from "@aws-amplify/ui-vue";
 import "@aws-amplify/ui-vue/styles.css";
 import { Amplify } from "aws-amplify";
 import awsconfig from "../aws-exports";
-// import navbar from "@/components/layout/navbar/navbar.vue";
-// import sidebar from "@/components/layout/sidebar/sidebar.vue";
 const layout = useLayoutStore();
 
 Amplify.configure(awsconfig);
@@ -57,8 +55,5 @@ useHead({
 <style lang="scss">
 [data-amplify-authenticator] {
   min-height: 100vh;
-  // --amplify-components-button-primary-background-color: #333;
-  // --amplify-components-tabs-item-active-color: #333;
-  // --amplify-components-tabs-item-active-border-color: #333;
 }
 </style>
