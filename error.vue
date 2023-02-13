@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import navbar from "~~/components/layout/navbar/navbar.vue";
-import sidebar from "~~/components/layout/sidebar/sidebar.vue";
+import navbar from "~~/components/layout/NavBar.vue";
+import sidebar from "~~/components/layout/SideBar.vue";
 useHead({
   title: "Felix Md",
   link: [
