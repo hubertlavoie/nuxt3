@@ -23,7 +23,8 @@ useHead({
     >
       <Vue3Lottie
         animationLink="https://assets5.lottiefiles.com/packages/lf20_suhe7qtm.json"
-        :width="'50%'"
+        width="400"
+        height="400"
       />
     </div>
   </v-app>
