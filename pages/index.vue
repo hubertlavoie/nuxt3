@@ -20,17 +20,30 @@ const testData = {
 };
 
 const lineData = {
-  labels: ["January", "February", "March", "April", "May", "June", "July"],
+  labels: [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ],
   datasets: [
     {
       label: "2022",
-      data: [10, 30, 50, 20, 25, 44, -10],
+      data: [10, 30, 50, 20, 25, 44, -10, 32, 64, 78, 12, 35],
       borderColor: "#0079af",
       backgroundColor: "#0079af",
     },
     {
       label: "2023",
-      data: [100, 33, 22, 19, 11, 49, 30],
+      data: [100, 33, 22, 19, 11, 49, 30, 24, 64, 43, 76, 23],
       borderColor: "#97b0c4",
       backgroundColor: "#97b0c4",
     },
