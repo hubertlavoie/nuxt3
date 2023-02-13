@@ -1,6 +1,11 @@
 <script setup lang="ts">
-import navbarWidgets from "./navbarWidgets.vue";
 const layout = useLayoutStore();
+const props = defineProps({
+  user: {
+    type: [Object],
+  },
+});
+console.log(props.user);
 </script>
 
 <template>
@@ -13,6 +18,6 @@ const layout = useLayoutStore();
     <img src="/images/felix.svg" width="60" alt="Felix" class="ml-2" />
     <span class="relative top-[8px] pl-2 text-xs">PORTAL</span>
     <v-spacer />
-    <navbarWidgets />
+    <LayoutNavbarWidgets />
   </v-app-bar>
 </template>

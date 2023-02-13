@@ -37,6 +37,9 @@ const undo = () => signature1.value.undo();
 const doNothing = () => {
   console.log("nothing to see here, move on");
 };
+const goToTop = () => {
+  window.scrollTo(0, 0);
+};
 </script>
 
 <template>
@@ -217,10 +220,10 @@ const doNothing = () => {
           variant="flat"
           @click="save('image/jpeg')"
           color="success"
-          prepend-icon="mdi-eye"
+          prepend-icon="mdi-send"
           size="large"
         >
-          Preview prescription</v-btn
+          Preview and submit</v-btn
         ><v-btn
           variant="flat"
           @click="doNothing()"
@@ -234,13 +237,12 @@ const doNothing = () => {
       </div>
       <v-btn
         variant="flat"
-        @click="approveAssessment(prescription)"
-        :disabled="true"
-        color="primary"
-        prepend-icon="mdi-send"
         size="large"
+        color="primary"
+        class="float-right"
+        @click="goToTop()"
       >
-        Submit prescription
+        <v-icon>mdi-chevron-up</v-icon>
       </v-btn>
     </div>
   </main>

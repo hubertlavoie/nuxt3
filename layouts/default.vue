@@ -3,8 +3,8 @@ import { Authenticator } from "@aws-amplify/ui-vue";
 import "@aws-amplify/ui-vue/styles.css";
 import { Amplify } from "aws-amplify";
 import awsconfig from "../aws-exports";
-import navbar from "../components/layout/navbar/navbar.vue";
-import sidebar from "../components/layout/sidebar/sidebar.vue";
+// import navbar from "@/components/layout/navbar/navbar.vue";
+// import sidebar from "@/components/layout/sidebar/sidebar.vue";
 const layout = useLayoutStore();
 
 Amplify.configure(awsconfig);
@@ -24,8 +24,8 @@ useHead({
   <authenticator :social-providers="['google']">
     <template v-slot="{ user, signOut }">
       <v-app class="bg-accent">
-        <navbar />
-        <sidebar />
+        <LayoutNavBar :user="user" />
+        <LayoutSideBar />
         <v-main>
           <v-container fluid>
             <div class="p-8">

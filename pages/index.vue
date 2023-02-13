@@ -14,15 +14,15 @@ const chartOptions = ref({
   },
 });
 const pieData = ref([
-  ["Task", "Hours per Day"],
-  ["Work", 11],
-  ["Eat", 2],
-  ["Commute", 2],
-  ["Watch TV", 2],
-  ["Sleep", 7],
+  ["Ailments", "Visits last week"],
+  ["Birth Control", 110],
+  ["Mental health", 20],
+  ["Acne", 50],
+  ["Hair loss", 20],
+  ["Erectile disfunction", 70],
 ]);
 const pieOptions = ref({
-  title: "My Daily Activities",
+  title: "Visits last week",
   pieHole: 0.4,
   width: "100%",
   height: 600,

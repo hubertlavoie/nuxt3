@@ -2,6 +2,7 @@
 import { createVuetify } from "vuetify";
 import type { ThemeDefinition } from "vuetify";
 import "@mdi/font/css/materialdesignicons.css";
+import "vuetify/styles";
 import * as components from "vuetify/components";
 import * as directives from "vuetify/directives";
 import { VDataTable } from "vuetify/labs/VDataTable";
@@ -28,7 +29,7 @@ const Lighttheme: ThemeDefinition = {
 };
 export default defineNuxtPlugin((nuxtApp) => {
   const vuetify = createVuetify({
-    ssr: false,
+    ssr: true,
     directives,
     components: {
       ...components,

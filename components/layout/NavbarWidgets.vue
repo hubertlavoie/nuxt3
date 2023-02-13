@@ -1,4 +1,13 @@
 <script setup>
+import { Auth } from "aws-amplify";
+
+const signOut = async () => {
+  try {
+    await Auth.signOut();
+  } catch (error) {
+    console.log("error signing out: ", error);
+  }
+};
 const userprofile = ref([
   {
     title: "My Profile",
@@ -50,7 +59,12 @@ const userprofile = ref([
           rounded="lg"
         >
         </v-list-item>
-        <v-btn block color="primary" variant="tonal" class="mt-4 py-4"
+        <v-btn
+          block
+          color="primary"
+          variant="tonal"
+          class="mt-4 py-4"
+          @click="signOut()"
           >Logout</v-btn
         >
       </v-list>
