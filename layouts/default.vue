@@ -53,7 +53,7 @@ useHead({
 </script>
 
 <template>
-  <authenticator :social-providers="['google']">
+  <authenticator">
     <template v-slot="{ user, signOut }">
       <v-app class="bg-accent">
         <LayoutNavBar :user="user" />
